@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu primeiro jogo</title>
+<style>
+body {
+  background: #101827;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#arena {
+  position: relative;
+  height: 330px;
+  background: #263449;
+  border-radius: 15px;
+  overflow: hidden;
+}
+#alvo {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  border: 0;
+  border-radius: 50%;
+  background: #27e58b;
+  font-size: 25px;
+  cursor: pointer;
+  left: 40%;
+  top: 40%;
+}
+button {
+  padding: 12px 20px;
+  border-radius: 9px;
+  border: 0;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<h1>🎮 Caça ao Alvo</h1>
+<p>Pontos: <span id="pontos">0</span></p>
+<div id="arena">
+  <button id="alvo" aria-label="Acertar alvo">🎯</button>
+</div>
+<p id="mensagem">Clique no alvo para marcar pontos!</p>
+<button onclick="reiniciar()">Recomeçar</button>
+<script>
+let pontos = 0;
+const alvo = document.getElementById("alvo");
+const arena = document.getElementById("arena");
+
+alvo.onclick = () => {
+  pontos++;
+  document.getElementById("pontos").textContent = pontos;
+
+  const maxX = arena.clientWidth - alvo.offsetWidth;
+  const maxY = arena.clientHeight - alvo.offsetHeight;
+
+  alvo.style.left = Math.random() * maxX + "px";
+  alvo.style.top = Math.random() * maxY + "px";
+
+  document.getElementById("mensagem").textContent =
+    "Boa! Continue jogando!";
+};
+
+function reiniciar() {
+  pontos = 0;
+  document.getElementById("pontos").textContent = 0;
+  alvo.style.left = "40%";
+  alvo.style.top = "40%";
+  document.getElementById("mensagem").textContent =
+    "Clique no alvo para marcar pontos!";
+}
+</script>
+</body>
+</html>
